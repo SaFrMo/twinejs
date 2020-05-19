@@ -6,10 +6,10 @@
 	{{ 'Language' | say }}
 	</button>
 
-	<template v-for="tag in passage.tags" transition="fade-in-out">
-		<div class="tag label label-info {{tagColors[tag]}}">{{ tag }}<button>
+	<template v-for="language in passage.languages" transition="fade-in-out">
+		<div class="language label label-info {{tagColors[language]}}">{{ language }}<button>
 			<i class="fa fa-caret-down"></i>
-			<tag-menu :tag="tag" :passage="passage" :story-id="storyId"></tag-menu>
+			<language-menu :language="language" :passage="passage" :story-id="storyId"></language-menu>
 		</button></div>
 	</template>
 
