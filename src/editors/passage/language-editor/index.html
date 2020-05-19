@@ -2,13 +2,15 @@
 	<span class="tags"></span>
 
 	<button class="subtle" type="button" @click="showNew" v-show="!newVisible"><i class="fa fa-plus"></i>
-	<!-- L10n: this is the noun form, as in tags you would apply to content. -->
-	{{ 'Language' | say }}
+	<!-- L10n: this is the noun form, as in translations you would apply to content. -->
+	{{ 'Translation' | say }}
 	</button>
 
+	<!-- Edit/remove languages -->
 	<template v-for="language in passage.languages" transition="fade-in-out">
-		<div class="language label label-info {{tagColors[language]}}">{{ language }}<button>
-			<i class="fa fa-caret-down"></i>
+		<div class="tag label label-info">{{ language }}<button>
+			<!-- TODO: start here - clicking pencil switches current translation -->
+			<i class="fa fa-pencil"></i>
 			<language-menu :language="language" :passage="passage" :story-id="storyId"></language-menu>
 		</button></div>
 	</template>
@@ -16,8 +18,8 @@
 	<span v-show="newVisible">
 		<!-- Using a <form> allows the "required" attribute on the input to be usable. -->
 		<form @submit.prevent="addNew">
-			<!-- L10n: A noun, i.e. what a tag is named. -->
-			<input type="text" placeholder="{{ 'Tag name' | say }}" required v-el:new-name>
+			<!-- L10n: A noun, i.e. what a language is named. -->
+			<input type="text" placeholder="{{ 'Language code' | say }}" required v-el:new-name>
 
 			<button type="button" @click="hideNew">Cancel</button>
 			<button type="submit" class="create"><i class="fa fa-check"></i> Add</button>

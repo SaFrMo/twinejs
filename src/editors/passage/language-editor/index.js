@@ -49,7 +49,7 @@ module.exports = Vue.extend({
 				this.storyId,
 				this.passage.id,
 				{
-					tags: uniq([].concat(this.passage.tags, newName))
+					languages: uniq([].concat(this.passage.languages || [], newName))
 				}
 			);
 
