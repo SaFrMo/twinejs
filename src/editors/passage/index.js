@@ -72,7 +72,7 @@ module.exports = Vue.extend({
 					passage.id !== this.passage.id
 			));
 		},
-		
+
 		autocompletions() {
 			return this.parentStory.passages.map(passage => passage.name);
 		}
@@ -246,7 +246,8 @@ module.exports = Vue.extend({
 	components: {
 		'code-mirror': require('../../vue/codemirror'),
 		'modal-dialog': require('../../ui/modal-dialog'),
-		'tag-editor': require('./tag-editor')
+		'tag-editor': require('./tag-editor'),
+		'language-editor': require('./language-editor')
 	},
 
 	vuex: {

@@ -9,6 +9,8 @@
 		{{ 'A passage already exists with this name.' | say }}
 	</p>
 
+	<language-editor :passage="passage" :story-id="storyId"></language-editor>
+
 	<div class="expand">
 		<code-mirror :options="cmOptions" :text="passage.text" @cm-change="saveText" v-ref:codemirror></code-mirror>
 	</div> <!-- .fullEdit -->
