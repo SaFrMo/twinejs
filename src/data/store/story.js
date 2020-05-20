@@ -229,11 +229,14 @@ const storyStore = (module.exports = {
 		// initial translation is whatever the browser is set to -
 		// pulled from ./pref.js
 		translations: [
-			window.navigator.userLanguage ||
-			window.navigator.language ||
-			window.navigator.browserLanguage ||
-			window.navigator.systemLanguage ||
-			'en-us'
+			{
+				label: locale.say('Default'),
+				code: window.navigator.userLanguage ||
+					window.navigator.language ||
+					window.navigator.browserLanguage ||
+					window.navigator.systemLanguage ||
+					'en-us'
+			}
 		]
 	},
 

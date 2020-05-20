@@ -6,17 +6,34 @@
 	<div class="content">
 		<table class="unlined">
 			<tbody>
+				<!-- Heading -->
 				<tr>
+					<th>{{ 'Label' | say }}</th>
+					<th>{{ 'Code' | say }}</th>
+				</tr>
+
+				<!-- Translations -->
+				<tr v-for="(i, translation) in story.translations" :key="i">
 					<td>
-						{{ charCount }}
+						<input type="text" v-model="translation.label"/>
 					</td>
 					<td>
-						{{ charDesc }}
+						<input type="text" v-model="translation.code"/>
+					</td>
+				</tr>
+
+				<!-- Add Button -->
+				<tr>
+					<td>
+						<button class="create" title="Add a new translation">
+							<i class="fa fa-plus"></i>
+							{{ 'Translation' | say }}
+						</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 
-		
+
 	</div>
 </modal-dialog>

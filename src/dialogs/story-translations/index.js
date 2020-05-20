@@ -21,6 +21,9 @@ module.exports = Vue.extend({
 		story() {
 			return this.allStories.find(story => story.id === this.storyId);
 		},
+		storyString(){
+			return JSON.stringify(this.story)
+		},
 
 		lastUpdate() {
 			return moment(this.story.lastUpdate).format('LLLL');
