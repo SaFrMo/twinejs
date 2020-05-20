@@ -6,6 +6,7 @@ const FormatDialog = require('../../../dialogs/story-format');
 const JavaScriptEditor = require('../../../editors/javascript');
 const StatsDialog = require('../../../dialogs/story-stats');
 const StylesheetEditor = require('../../../editors/stylesheet');
+const TranslationsDialog = require('../../../dialogs/story-translations');
 const {loadFormat} = require('../../../data/actions/story-format');
 const locale = require('../../../locale');
 const {proofStory} = require('../../../common/launch-story');
@@ -96,6 +97,13 @@ module.exports = Vue.extend({
 			this.updateStory(this.story.id, {
 				snapToGrid: !this.story.snapToGrid
 			});
+		},
+
+		manageTranslations(e){
+			new TranslationsDialog({
+				data: {storyId: this.story.id, origin: e.target},
+				store: this.$store
+			}).$mountTo(document.body);
 		}
 	},
 
