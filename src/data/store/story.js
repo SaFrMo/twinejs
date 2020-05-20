@@ -136,7 +136,7 @@ const storyStore = (module.exports = {
 			name provided), even if you rename one to a name a previous one used
 			to have.
 			*/
-			
+
 			let story = getStoryById(state, storyId);
 			let newPassage = Object.assign(
 				{
@@ -225,7 +225,16 @@ const storyStore = (module.exports = {
 		stylesheet: '',
 		script: '',
 		storyFormat: '',
-		storyFormatVersion: ''
+		storyFormatVersion: '',
+		// initial translation is whatever the browser is set to -
+		// pulled from ./pref.js
+		translations: [
+			window.navigator.userLanguage ||
+			window.navigator.language ||
+			window.navigator.browserLanguage ||
+			window.navigator.systemLanguage ||
+			'en-us'
+		]
 	},
 
 	passageDefaults: {
