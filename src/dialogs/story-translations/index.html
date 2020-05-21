@@ -1,4 +1,4 @@
-<modal-dialog id="statsModal" :origin="origin">
+<modal-dialog id="statsModal" :origin="origin" @close="close" @reject="close">
 	<span slot="title">
 	{{ 'Translations' | say }}
 	</span>
@@ -13,7 +13,7 @@
 				</tr>
 
 				<!-- Translations -->
-				<tr v-for="(i, translation) in story.translations" :key="i">
+				<tr v-for="(i, translation) in translations" :key="i">
 					<td>
 						<input type="text" v-model="translation.label"/>
 					</td>
