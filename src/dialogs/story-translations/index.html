@@ -20,12 +20,17 @@
 					<td>
 						<input type="text" v-model="translation.code"/>
 					</td>
+					<td>
+						<button class="danger subtle" title="Delete translation" @click="removeTranslation(translation.id)" v-if="i > 0">
+							<i class="fa fa-trash-o"></i>
+						</button>
+					</td>
 				</tr>
 
 				<!-- Add Button -->
 				<tr>
 					<td>
-						<button class="create" title="Add a new translation">
+						<button class="create" title="Add a new translation" @click="addTranslation">
 							<i class="fa fa-plus"></i>
 							{{ 'Translation' | say }}
 						</button>

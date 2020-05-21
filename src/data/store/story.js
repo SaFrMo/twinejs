@@ -235,7 +235,8 @@ const storyStore = (module.exports = {
 					window.navigator.language ||
 					window.navigator.browserLanguage ||
 					window.navigator.systemLanguage ||
-					'en-us'
+					'en-us',
+				id: 0
 			}
 		]
 	},

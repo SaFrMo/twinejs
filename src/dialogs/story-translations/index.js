@@ -29,18 +29,21 @@ module.exports = Vue.extend({
 		},
 	},
 
-	vuex: {
-		getters: {
-			allStories: state => state.story.stories
-		},
-		actions: {
-			updateStory
-		}
-	},
-
 	methods: {
 		close(){
 			this.saveTranslations()
+		},
+		addTranslation(){
+			this.translations.push({
+				label: 'label',
+				code: 'code',
+				id: Date.now()
+			})
+		},
+		removeTranslation(id){
+			this.translations = this.translations.filter(translation => {
+				return translation.id !== id
+			})
 		},
 		saveTranslations(){
 			this.updateStory(
@@ -49,6 +52,15 @@ module.exports = Vue.extend({
 					translations: this.translations
 				}
 			);
+		}
+	},
+
+	vuex: {
+		getters: {
+			allStories: state => state.story.stories
+		},
+		actions: {
+			updateStory
 		}
 	},
 
