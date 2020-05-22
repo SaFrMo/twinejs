@@ -5,6 +5,8 @@
 
 	<tag-editor :passage="passage" :story-id="storyId"></tag-editor>
 
+	<translation-selector v-if="parentStory.translations && parentStory.translations.length > 1" :story-id="storyId"></translation-selector>
+
 	<p class="error" v-if="!userPassageNameValid">
 		{{ 'A passage already exists with this name.' | say }}
 	</p>

@@ -1,0 +1,5 @@
+<div class="translationSelector">
+	<button v-for="(i, translation) in story.translations" class="subtle" type="button" @click="selectTranslation(translation)" :key="i" ><i class="fa fa-pencil"></i>
+		{{ translation.label }}
+	</button>
+</div>
