@@ -75,6 +75,15 @@ module.exports = Vue.extend({
 
 		autocompletions() {
 			return this.parentStory.passages.map(passage => passage.name);
+		},
+
+		currentText() {
+			const found = this.passage.translations.find(t => t.id === this.currentTranslationId)
+			const output = this.currentTranslationId === 0
+				? this.passage.text
+				: found ? found.text : this.passage.text
+
+			return output
 		}
 	},
 
@@ -258,7 +267,8 @@ module.exports = Vue.extend({
 		},
 
 		getters: {
-			allStories: state => state.story.stories
+			allStories: state => state.story.stories,
+			currentTranslationId: state => state.pref.currentTranslationId
 		}
 	},
 
