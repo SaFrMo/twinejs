@@ -2,6 +2,7 @@
 
 const Vue = require('vue');
 const { updatePassage } = require('../../../data/actions/passage');
+const { setPref } = require('../../../data/actions/pref')
 const uniq = require('lodash.uniq');
 
 module.exports = Vue.extend({
@@ -23,7 +24,7 @@ module.exports = Vue.extend({
 
 	methods: {
 		selectTranslation(translation){
-			console.log(translation)
+			this.setPref('currentLanguageId', translation.id)
 		}
 	},
 
@@ -31,6 +32,6 @@ module.exports = Vue.extend({
 		getters: {
 			allStories: state => state.story.stories
 		},
-		actions: { updatePassage }
+		actions: { updatePassage, setPref }
 	}
 });

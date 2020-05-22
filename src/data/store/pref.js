@@ -18,7 +18,7 @@ module.exports = {
 			'en-us',
 		proofingFormat: 'Paperthin',
 		welcomeSeen: false,
-		currentLanguageIndex: 0
+		currentLanguageId: 0
 	},
 
 	mutations: {
