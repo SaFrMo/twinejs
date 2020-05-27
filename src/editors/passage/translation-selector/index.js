@@ -24,6 +24,9 @@ module.exports = Vue.extend({
 
 	methods: {
 		selectTranslation(translation){
+			// emit event so we can save current passage content
+			this.$emit('beforeTranslationChange')
+
 			this.setPref('currentTranslationId', translation.id)
 
 			// all done if the translation is the default text

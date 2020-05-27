@@ -142,10 +142,33 @@ module.exports = Vue.extend({
 		},
 
 		saveText(text) {
+			const toSave = {}
+
+			// if we're on the default translation, update it
+			if (this.currentTranslationId === 0){
+				toSave.text = text
+			}
+
+			// otherwise, update selected translation
+			else {
+				const allTranslations = this.passage.translations || []
+
+				// remove translation if already exists in this passage
+				toSave.translations = allTranslations.filter(translation =>
+					translation.id !== this.currentTranslationId
+				)
+
+				// add new translation content
+				const translationInfo = this.parentStory.translations.find(t =>
+					t.id === this.currentTranslationId
+				)
+				toSave.translations.push({...translationInfo, text})
+			}
+
 			this.updatePassage(
 				this.parentStory.id,
 				this.passage.id,
-				{ text: text }
+				toSave
 			);
 		},
 
