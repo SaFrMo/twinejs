@@ -27,7 +27,7 @@ module.exports = Vue.extend({
 			type: Object,
 			required: true
 		},
-		
+
 		parentStory: {
 			type: Object,
 			required: true
@@ -120,7 +120,7 @@ module.exports = Vue.extend({
 					: null
 			};
 		},
-		
+
 		cssClasses() {
 			let result = [];
 
@@ -150,11 +150,15 @@ module.exports = Vue.extend({
 		},
 
 		excerpt() {
-			if (this.passage.text.length < 100) {
-				return escape(this.passage.text);
+			const text = this.currentTranslationId === 0
+				? this.passage.text
+				: (this.passage.translations.find(t => t.id === this.currentTranslationId) || {}).text
+
+			if (text.length < 100) {
+				return escape(text);
 			}
 
-			return escape(this.passage.text.substr(0, 99)) + '&hellip;';
+			return escape(text.substr(0, 99)) + '&hellip;';
 		},
 	},
 
@@ -209,7 +213,7 @@ module.exports = Vue.extend({
 			if (e.type === 'mousedown' && e.which !== 1) {
 				return;
 			}
-			
+
 			if (e.shiftKey || e.ctrlKey) {
 				/*
 				Shift- or control-clicking toggles our selected status, but
@@ -307,7 +311,7 @@ module.exports = Vue.extend({
 			user may be starting a drag; but now that we know for sure that the
 			user didn't intend this, we select just this one.
 			*/
-			
+
 			if (this.dragXOffset === 0 && this.dragYOffset === 0) {
 				if (!(e.ctrlKey || e.shiftKey)) {
 					this.selectPassages(this.parentStory.id, p => p !== this);
@@ -387,8 +391,8 @@ module.exports = Vue.extend({
 				const top = this.passage.top + yOffset
 				/ this.parentStory.zoom;
 				const left = this.passage.left + xOffset
-				/ this.parentStory.zoom; 
-				
+				/ this.parentStory.zoom;
+
 				if (this.passage.top !== top || this.passage.left !== left) {
 					this.updatePassage(
 						this.parentStory.id,
@@ -430,6 +434,9 @@ module.exports = Vue.extend({
 			selectPassages,
 			updatePassage,
 			deletePassage
+		},
+		getters: {
+			currentTranslationId: state => state.pref.currentTranslationId
 		}
 	},
 

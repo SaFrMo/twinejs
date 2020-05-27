@@ -160,6 +160,10 @@ const storyStore = (module.exports = {
 			}
 
 			newPassage.story = story.id;
+
+			// populate translations from translations in story
+			newPassage.translations = story.translations.map(t => ({...t, text: ''}))
+
 			story.passages.push(newPassage);
 
 			if (story.passages.length === 1) {
@@ -253,6 +257,7 @@ const storyStore = (module.exports = {
 
 		text: ui.hasPrimaryTouchUI()
 			? locale.say('Tap this passage, then the pencil icon to edit it.')
-			: locale.say('Double-click this passage to edit it.')
+			: locale.say('Double-click this passage to edit it.'),
+		translations: []
 	}
 });
