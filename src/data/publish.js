@@ -132,7 +132,8 @@ const publish = module.exports = {
 			`name="${escape(passage.name)}" ` +
 			`tags="${escape(passage.tags.join(' '))}" ` +
 			`position="${passage.left},${passage.top}" ` +
-			`size="${passage.width},${passage.height}">` +
+			`size="${passage.width},${passage.height}"` +
+			`translations="${escape(JSON.stringify(passage.translations.map(JSON.stringify)))}">` + 
 			`${escape(passage.text)}</tw-passagedata>`;
 	}
 };
