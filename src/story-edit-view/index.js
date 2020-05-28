@@ -6,6 +6,7 @@ const { confirm } = require('../dialogs/confirm');
 const { createPassage, deletePassage, positionPassage, updatePassage } = require('../data/actions/passage');
 const { loadFormat } = require('../data/actions/story-format');
 const { updateStory } = require('../data/actions/story');
+const { setPref } = require('../data/actions/pref');
 const domEvents = require('../vue/mixins/dom-events');
 const locale = require('../locale');
 const { passageDefaults } = require('../data/store/story');
@@ -71,7 +72,7 @@ module.exports = Vue.extend({
 		* the size of the browser window
 		* the minimum amount of space needed to enclose all existing
 		passages
-		
+
 		... whichever is bigger, plus 50% of the browser window's
 		width and height, so that there's always room for the story to
 		expand.
@@ -173,7 +174,7 @@ module.exports = Vue.extend({
 				Change the window's scroll position so that the same logical
 				coordinates are at its center.
 				*/
-				
+
 				const halfWidth = window.innerWidth / 2;
 				const halfHeight = window.innerHeight / 2;
 				const logCenterX = (window.scrollX + halfWidth) / old;
@@ -194,6 +195,14 @@ module.exports = Vue.extend({
 
 		if (this.story.passages.length === 0) {
 			this.createPassageAt();
+		}
+
+		// make sure this story has a translation that matches the selected one
+		const translations = this.story.translations
+		const currentTranslationId = this.pref.currentTranslationId || 0
+		if (currentTranslationId !== 0 && !translations.find(t => t.id === currentTranslationId)){
+			// reset to default if none matching
+			this.setPref('currentTranslationId', 0)
 		}
 	},
 
@@ -296,7 +305,7 @@ module.exports = Vue.extend({
 			Then position it so it doesn't overlap any others, and save it
 			again.
 			*/
-			
+
 			this.positionPassage(
 				this.story.id,
 				this.story.passages.find(p => p.name === name).id,
@@ -309,13 +318,13 @@ module.exports = Vue.extend({
 		webkitmouseforcedown event. At the time of writing, this is a
 		Mac-specific feature, but can be extended once standards catch up.
 		*/
-		
+
 		onMouseForceDown(e) {
 			let top = (e.pageY / this.story.zoom) -
 				(passageDefaults.height / 2);
 			let left = (e.pageX / this.story.zoom) -
 				(passageDefaults.width / 2);
-			
+
 			this.createPassage(null, top, left);
 		},
 
@@ -360,7 +369,7 @@ module.exports = Vue.extend({
 				case 187:
 					this.zoomOut();
 					break;
-				
+
 				/* Minus key */
 
 				case 189:
@@ -408,7 +417,7 @@ module.exports = Vue.extend({
 		'highlight-regexp-change'(value) {
 			this.highlightRegexp = value;
 		},
-		
+
 		/*
 		A hook into our createPassage() method for child components.
 		*/
@@ -489,13 +498,15 @@ module.exports = Vue.extend({
 			loadFormat,
 			positionPassage,
 			updatePassage,
-			updateStory
+			updateStory,
+			setPref
 		},
 
 		getters: {
 			allFormats: state => state.storyFormat.formats,
 			allStories: state => state.story.stories,
-			defaultFormatName: state => state.pref.defaultFormat
+			defaultFormatName: state => state.pref.defaultFormat,
+			pref: state => state.pref
 		}
 	},
 
