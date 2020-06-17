@@ -177,6 +177,12 @@ const actions = (module.exports = {
 
 		const builtinFormats = [
 			{
+				name: 'Twison',
+				url: 'story-formats/twison/format.js',
+				version: '1.1.0',
+				userAdded: false
+			},
+			{
 				name: 'Chapbook',
 				url: 'story-formats/chapbook-1.1.0/format.js',
 				version: '1.1.0',
@@ -251,8 +257,8 @@ const actions = (module.exports = {
 
 		if (typeof store.state.pref.defaultFormat !== 'object') {
 			setPref(store, 'defaultFormat', {
-				name: 'Harlowe',
-				version: '3.1.0'
+				name: 'Twison',
+				version: '1.1.0'
 			});
 		}
 
